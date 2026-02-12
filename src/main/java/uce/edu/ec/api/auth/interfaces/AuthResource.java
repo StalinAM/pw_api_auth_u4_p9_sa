@@ -13,7 +13,7 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import uce.edu.ec.api.auth.application.UsuarioService;
-import uce.edu.ec.api.auth.application.representation.UsuarioRepresentation;
+import uce.edu.ec.api.auth.representation.UsuarioRepresentation;
 
 @Path("/auth")
 public class AuthResource {

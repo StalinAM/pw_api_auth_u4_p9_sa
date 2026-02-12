@@ -1,10 +1,10 @@
-package uce.edu.ec.api.auth.application.representation;
+package uce.edu.ec.api.auth.representation;
 
 public class UsuarioRepresentation {
-    public Long id;
-    public String username;
-    public String rol;
-    public String password;
+    private Long id;
+    private String username;
+    private String rol;
+    private String password;
 
     public Long getId() {
         return id;

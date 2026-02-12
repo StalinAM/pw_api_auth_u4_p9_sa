@@ -1,7 +1,6 @@
 package uce.edu.ec.api.auth.domain;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,12 +15,11 @@ public class Usuario extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
-    @Column
-    public String username;
-    public String password;
-    public String rol;
+    private String username;
+    private String password;
+    private String rol;
 
     public Long getId() {
         return id;
