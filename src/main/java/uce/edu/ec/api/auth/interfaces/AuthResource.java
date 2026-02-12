@@ -1,6 +1,7 @@
 package uce.edu.ec.api.auth.interfaces;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,15 +11,21 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
 import uce.edu.ec.api.auth.application.UsuarioService;
+import uce.edu.ec.api.auth.representation.LinkDTO;
 import uce.edu.ec.api.auth.representation.UsuarioRepresentation;
 
 @Path("/auth")
 public class AuthResource {
     @Inject
     private UsuarioService usuarioService;
+
+    @Context
+    private UriInfo uriInfo;
 
     @GET
     @Path("/token")
@@ -53,6 +60,22 @@ public class AuthResource {
 
         TokenResponse resp = new TokenResponse(jwt, exp.getEpochSecond(), role);
         return Response.ok(resp).build();
+    }
+
+    @GET
+    @Path("/usuarios")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarUsuarios() {
+        var usuarios = usuarioService.listarTodos();
+        // Agrega links a cada usuario
+        usuarios.forEach(this::construirLinks);
+        return Response.ok(usuarios).build();
+    }
+
+    private void construirLinks(UsuarioRepresentation usuario) {
+        String self = this.uriInfo.getBaseUriBuilder().path(AuthResource.class)
+                .path(String.valueOf(usuario.getId())).build().toString();
+        usuario.setLinks(List.of(new LinkDTO(self, "self")));
     }
 
     public static class TokenResponse {

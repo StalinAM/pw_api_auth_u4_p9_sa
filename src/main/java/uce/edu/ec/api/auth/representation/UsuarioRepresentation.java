@@ -1,10 +1,13 @@
 package uce.edu.ec.api.auth.representation;
 
+import java.util.List;
+
 public class UsuarioRepresentation {
     private Long id;
     private String username;
     private String rol;
     private String password;
+    private List<LinkDTO> links;
 
     public Long getId() {
         return id;
@@ -38,4 +41,11 @@ public class UsuarioRepresentation {
         this.password = password;
     }
 
+    public List<LinkDTO> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<LinkDTO> links) {
+        this.links = links;
+    }
 }

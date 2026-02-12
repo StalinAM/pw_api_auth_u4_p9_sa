@@ -37,4 +37,10 @@ public class UsuarioService {
                 .map(this::mapToRepresentation)
                 .toList();
     }
+
+    public List<UsuarioRepresentation> listarTodos() {
+        return usuarioRepository.listAll().stream()
+                .map(this::mapToRepresentation)
+                .toList();
+    }
 }
