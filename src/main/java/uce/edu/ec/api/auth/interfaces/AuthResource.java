@@ -53,7 +53,7 @@ public class AuthResource {
 
         String jwt = Jwt.issuer(issuer)
                 .subject(user)
-                .groups(Set.of(role)) // roles: user / admin
+                .groups(Set.of(role))
                 .issuedAt(now)
                 .expiresAt(exp)
                 .sign();
